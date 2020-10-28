@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user-subscriptions")
+    @RequestMapping("/user-subscriptions")
 public class UserNotificationSubsController {
 
     @Autowired
