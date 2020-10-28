@@ -33,7 +33,7 @@ public class UserNotificationSubsService {
         return userNotificationSubsRepository.getByUserId(id);
     }
     public void delete(UserNotificationSubscription object){
-        userNotificationSubsRepository.delete(object);
+        userNotificationSubsRepository.deleteWithoutId(object.getUser_id(),object.getNotificationType_id());
     }
     public void save(UserNotificationSubscription object){
         userNotificationSubsRepository.save(object);
