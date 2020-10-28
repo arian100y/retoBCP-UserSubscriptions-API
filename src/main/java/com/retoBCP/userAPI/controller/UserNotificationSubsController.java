@@ -47,6 +47,13 @@ public class UserNotificationSubsController {
 
         userNotificationSubsService.save(object);
     }
+    @PostMapping("/exists")
+    public  ResponseEntity<UserNotificationSubscription>  exists(@RequestBody UserNotificationSubscription object){
+
+        if(userNotificationSubsService.exists(object.getUser_id(),object.getNotificationType_id())) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
     @DeleteMapping
     public  ResponseEntity<UserNotificationSubscription> deleteSubscription(@RequestBody UserNotificationSubscription object){
 

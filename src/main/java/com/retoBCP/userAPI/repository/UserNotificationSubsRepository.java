@@ -17,10 +17,17 @@ public interface UserNotificationSubsRepository extends JpaRepository<UserNotifi
             nativeQuery = true)
     List<UserNotificationSubscription> getByUserId(
             @Param("id") Integer id);
+
     @Transactional
     @Modifying
     @Query(value = "DELETE  FROM usuario_notificacion_subscripcion u WHERE u.user_id = :uid AND u.notification_type_id = :nid",
             nativeQuery = true)
     void deleteWithoutId(
             @Param("uid") Integer uid,@Param("nid") Integer nid);
+    //select exists(select 1 from contact where id=12)
+    @Query(value = "SELECT EXISTS (SELECT * FROM usuario_notificacion_subscripcion u WHERE  (u.user_id = :uid AND u.notification_type_id = :nid))",
+            nativeQuery = true)
+    Boolean exists(
+            @Param("uid") Integer uid,@Param("nid") Integer nid);
+    
 }

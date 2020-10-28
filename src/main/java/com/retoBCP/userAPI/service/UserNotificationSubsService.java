@@ -4,6 +4,8 @@ import com.retoBCP.userAPI.models.NotificationType;
 import com.retoBCP.userAPI.models.UserNotificationSubscription;
 import com.retoBCP.userAPI.repository.UserNotificationSubsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -38,5 +40,8 @@ public class UserNotificationSubsService {
     }
     public void save(UserNotificationSubscription object){
         userNotificationSubsRepository.save(object);
+    }
+    public Boolean exists(Integer uid, Integer nid){
+        return userNotificationSubsRepository.exists(uid,nid);
     }
 }
