@@ -16,7 +16,7 @@ public interface UserNotificationSubsRepository extends JpaRepository<UserNotifi
     List<UserNotificationSubscription> getByUserId(
             @Param("id") Integer id);
 
-    @Query(value = "DELETE * FROM usuario_notificacion_subscripcion u WHERE u.user_id = :uid AND u.notificationType_id = :nid",
+    @Query(value = "DELETE  FROM usuario_notificacion_subscripcion u WHERE u.user_id = :uid AND u.notificationType_id = :nid",
             nativeQuery = true)
     void deleteWithoutId(
             @Param("uid") Integer uid,@Param("nid") Integer nid);
