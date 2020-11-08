@@ -34,6 +34,9 @@ public class UserNotificationSubsService {
     public List<UserNotificationSubscription> getByUserId(Integer id){
         return userNotificationSubsRepository.getByUserId(id);
     }
+    public List<UserNotificationSubscription> getByNotifTypeId(Integer id){
+        return userNotificationSubsRepository.getByNotifTypeId(id);
+    }
     public void delete(UserNotificationSubscription object){
         System.out.println(object.getUser_id()+"  " +object.getNotificationType_id());
         userNotificationSubsRepository.deleteWithoutId(object.getUser_id(),object.getNotificationType_id());

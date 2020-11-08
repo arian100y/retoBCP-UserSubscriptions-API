@@ -26,15 +26,19 @@ public class UserNotificationSubsController {
     }
 
     @GetMapping
-    public List<UserNotificationSubscription> getAllNotifications(){
+    public List<UserNotificationSubscription> getAllSubscriptions(){
         return userNotificationSubsService.getAllSubscriptions();
     }
     @GetMapping("/{id}")
     public List<UserNotificationSubscription> getSubscriptionsForUser(@PathVariable Integer id){
         return userNotificationSubsService.getByUserId(id);
     }
+    @GetMapping("/specific/{id}")
+    public List<UserNotificationSubscription> getSpecificSubAllUsers(@PathVariable Integer id){
+        return userNotificationSubsService.getByNotifTypeId(id);
+    }
     @PostMapping("/all/{id}")
-    public void addSubscriptions(@PathVariable Integer id){
+    public void addAllSubscriptionsForOneUser(@PathVariable Integer id){
 
         ResponseEntity<NotificationType[]> responseEntity = restTemplate.getForEntity("https://reto-bcp.herokuapp.com/api/v1/notificationTypes", NotificationType[].class);
         NotificationType[] notifs = responseEntity.getBody();
@@ -42,11 +46,13 @@ public class UserNotificationSubsController {
 
         userNotificationSubsService.addAllSubscriptions(id, notifs);
     }
+
     @PostMapping()
-    public void addSubscription(@RequestBody UserNotificationSubscription object){
+    public void addSubscriptionForOneUser(@RequestBody UserNotificationSubscription object){
 
         userNotificationSubsService.save(object);
     }
+
     @PostMapping("/exists")
     public  ResponseEntity<UserNotificationSubscription>  exists(@RequestBody UserNotificationSubscription object){
 
@@ -54,6 +60,7 @@ public class UserNotificationSubsController {
             return new ResponseEntity<>(HttpStatus.OK);
         }else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
     @DeleteMapping
     public  ResponseEntity<UserNotificationSubscription> deleteSubscription(@RequestBody UserNotificationSubscription object){
 
