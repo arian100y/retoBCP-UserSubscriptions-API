@@ -61,6 +61,10 @@ public class UserNotificationSubsController {
         }else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    @DeleteMapping("/all")
+    public void deleteAll(){
+        userNotificationSubsService.deleteAll();
+    }
     @DeleteMapping
     public  ResponseEntity<UserNotificationSubscription> deleteSubscription(@RequestBody UserNotificationSubscription object){
 

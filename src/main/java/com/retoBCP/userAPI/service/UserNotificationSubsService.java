@@ -22,7 +22,9 @@ public class UserNotificationSubsService {
         userNotificationSubsRepository.findAll().forEach( userNotificationSubscriptions::add);
         return userNotificationSubscriptions;
     }
-
+    public void deleteAll(){
+        userNotificationSubsRepository.deleteAll();
+    }
     public void addAllSubscriptions(Integer id, NotificationType[] notifs){
 
         for (int i = 0; i < notifs.length; i++) {
